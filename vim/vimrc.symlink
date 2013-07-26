@@ -41,7 +41,7 @@ set timeoutlen=250  " Time to wait after ESC (default causes an annoying delay)
 set spell
 
 syntax enable
-set background=light
+set background=dark
 colorscheme solarized
 " hi Normal guibg=#111117
 hi Normal guibg=#FDF6E3
