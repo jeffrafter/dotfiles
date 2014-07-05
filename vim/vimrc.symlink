@@ -6,6 +6,9 @@ set nocompatible  " We don't want vi compatibility.
 " Add recently accessed projects menu (project plugin)
 set viminfo^=!
 
+let g:loaded_netrw        = 1 " Disable netrw
+let g:loaded_netrwPlugin  = 1 " Disable netrw
+
 " Minibuffer Explorer Settings
 let g:miniBufExplMapWindowNavVim = 1
 let g:miniBufExplMapWindowNavArrows = 1
@@ -26,8 +29,7 @@ map <silent> <m-n> :cn <cr>
 
 " Change which file opens after executing :Rails command
 let g:rails_default_file='config/database.yml'
-
-syntax enable
+let g:syntastic_ruby_exec = '~/.rbenv/versions/2.0.0-p247/bin/ruby'
 
 set cf  " Enable error files & error jumping.
 set clipboard+=unnamed  " Yanks go on clipboard instead.
@@ -44,7 +46,7 @@ syntax enable
 set background=dark
 colorscheme solarized
 " hi Normal guibg=#111117
-hi Normal guibg=#FDF6E3
+" hi Normal guibg=#FDF6E3
 
 " Formatting (some of these are for coding in C and C++)
 set ts=2  " Tabs are 2 spaces
@@ -107,7 +109,8 @@ if has('gui')
   endif
 
   if has('gui_macvim')
-    set guifont=Menlo:h12
+    " set guifont=Menlo:h12
+    set guifont=VeryHighSpeedTransport:h14
     set fuoptions=maxhorz,maxvert  " Let Fullscreen be really fullscreen
     set transparency=0             " Mac selling point #1? transparent windows! :-) was 5
   endif
@@ -120,10 +123,12 @@ function! <SID>StripTrailingWhitespaces()
     let l = line(".")
     let c = col(".")
     " Do the business:
+    retab
     %s/\s\+$//e
     " Clean up: restore previous search history, and cursor position
     let @/=_s
     call cursor(l, c)
+    echom "Stripped trailing whitespace"
 endfunction
 
 function! <SID>Clean()
@@ -132,11 +137,12 @@ function! <SID>Clean()
     let lC = line(".")
     let cC = col(".")
     " Do the business:
-    %s/	/  /e
+    %s/\t/  /e
     %s/\s\+$//e
     " Clean up: restore previous search history, and cursor position
     let @/=_sC
     call cursor(lC, cC)
+    echom "Cleaned whitespace"
 endfunction
 
 nnoremap <C-H> :Hexmode<CR>
@@ -186,11 +192,14 @@ endfunction
 
 " autocommands
 if has('autocmd')
-  autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
-  autocmd BufRead *.md :setlocal noet
+  # autocmd FileType make     set noexpandtab
+  # autocmd FileType python   set noexpandtab
+  # autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
 
-  autocmd FileType make     set noexpandtab
-  autocmd FileType python   set noexpandtab
+"  if (&ft == "make") || (&ft == "python")
+"  else
+"    autocmd BufWritePre * :call <SID>Clean()
+"  endif
 endif
 
 if has("gui_macvim")

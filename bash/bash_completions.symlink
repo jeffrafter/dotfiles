@@ -2,7 +2,7 @@ source /usr/local/git/contrib/completion/git-completion.bash
 source /usr/local/git/contrib/completion/git-prompt.sh
 
 if [ -f /etc/bash_completion ]; then
-	. /etc/bash_completion
+  . /etc/bash_completion
 fi
 
 if [ -f `brew --prefix`/etc/autojump ]; then
@@ -11,4 +11,8 @@ fi
 
 if [ -f `brew --prefix`/etc/bash_completion ]; then
   . `brew --prefix`/etc/bash_completion
+fi
+
+if [ -f "$(which aws)" ]; then
+  complete -C aws_completer aws
 fi

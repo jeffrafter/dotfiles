@@ -6,4 +6,4 @@
 #
 #  Where 0 is the seek seconds from the start of the file if you want to clip
 # -vn
-ffmpeg -i $1 -af volume=2.000000 -ab 192k -ss $3 $2
+ffmpeg -i "$1" -af volume=2.000000 -ab 192k -ss "$3" "$2"

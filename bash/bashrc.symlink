@@ -1,6 +1,6 @@
 export DEVKITPRO=/projects/devkitpro
 export DEVKITPPC=$DEVKITPRO/devkitPPC
-export PATH=~/.dotfiles/bin:/usr/local/bin:/usr/local/sbin:/opt/local/bin:/opt/local/sbin:$DEVKITPPC/bin:$PATH
+export PATH=~/.dotfiles/bin:/usr/local/bin:/usr/local/sbin:/usr/local/share/npm/bin:/opt/local/bin:/opt/local/sbin:$DEVKITPPC/bin:/usr/local/share/python:$PATH
 export MANPATH=/opt/local/share/man:$MANPATH
 export HISTCONTROL=ignoredups
 export SVN_EDITOR="nano"
@@ -30,3 +30,9 @@ esac
 if [ -f ~/.bash_extras ]; then
    source ~/.bash_extras
 fi
+
+# added by travis gem
+source /Users/njero/.travis/travis.sh
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
