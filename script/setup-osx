@@ -15,18 +15,18 @@ setup_osx () {
   # General UI/UX                                                               #
   ###############################################################################
 
-  user "What is your computer name? (e.g. $(scutil --get ComputerName))"
-  read -e osx_computer_name
+  # user "What is your computer name? (e.g. $(scutil --get ComputerName))"
+  # read -e osx_computer_name
 
-  user "What is your computer host name? (e.g. $(scutil --get HostName))"
-  read -e osx_computer_host_name
+  # user "What is your computer host name? (e.g. $(scutil --get HostName))"
+  # read -e osx_computer_host_name
 
   # Set computer name (as done via System Preferences → Sharing)
-  sudo scutil --set ComputerName $osx_computer_name
-  sudo scutil --set HostName $osx_computer_host_name
+  # sudo scutil --set ComputerName $osx_computer_name
+  # sudo scutil --set HostName $osx_computer_host_name
   # sudo scutil --set LocalHostName $osx_computer_host_name.local
-  sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string $osx_computer_host_name
-  success "Host names set"
+  # sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string $osx_computer_host_name
+  # success "Host names set"
 
   sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo HostName
   success "Reveal IP address, hostname, OS version, etc. when clicking the clock in the login window"
@@ -44,8 +44,8 @@ setup_osx () {
   defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
   success "Automatically quit printer app once the print jobs complete"
 
-  defaults write com.apple.LaunchServices LSQuarantine -bool false
-  success "Disable the “Are you sure you want to open this application?” dialog"
+  # defaults write com.apple.LaunchServices LSQuarantine -bool false
+  # success "Disable the “Are you sure you want to open this application?” dialog"
 
   # Try e.g. `cd /tmp; unidecode "\x{0000}" > cc.txt; open -e cc.txt`
   defaults write NSGlobalDomain NSTextShowsControlCharacters -bool true
@@ -172,10 +172,10 @@ setup_osx () {
   defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
   success "Avoid creating .DS_Store files on network volumes"
 
-  defaults write com.apple.frameworks.diskimages skip-verify -bool true
-  defaults write com.apple.frameworks.diskimages skip-verify-locked -bool true
-  defaults write com.apple.frameworks.diskimages skip-verify-remote -bool true
-  success "Disable disk image verification"
+  # defaults write com.apple.frameworks.diskimages skip-verify -bool true
+  # defaults write com.apple.frameworks.diskimages skip-verify-locked -bool true
+  # defaults write com.apple.frameworks.diskimages skip-verify-remote -bool true
+  # success "Disable disk image verification"
 
   defaults write com.apple.frameworks.diskimages auto-open-ro-root -bool true
   defaults write com.apple.frameworks.diskimages auto-open-rw-root -bool true
@@ -288,7 +288,7 @@ setup_osx () {
   # find ~/Library/Application\ Support/Dock -name "*.db" -maxdepth 1 -delete
 
   # Add iOS Simulator to Launchpad
-  # ln -s /Applications/Xcode.app/Contents/Applications/iPhone\ Simulator.app /Applications/iOS\ Simulator.app
+  ln -s /Applications/Xcode.app/Contents/Applications/iPhone\ Simulator.app /Applications/iOS\ Simulator.app
 
   # Add a spacer to the left side of the Dock (where the applications are)
   # defaults write com.apple.dock persistent-apps -array-add '{tile-data={}; tile-type="spacer-tile";}'

@@ -16,9 +16,16 @@ let g:miniBufExplMapCTabSwitchBufs = 1
 let g:miniBufExplModSelTarget = 1
 
 " Command-T
-let g:CommandTMaxHeight=20
-let g:CommandTAcceptSelectionMap = '<C-t>'
-let g:CommandTAcceptSelectionTabMap = '<cr>'
+" let g:CommandTMaxHeight=20
+" let g:CommandTAcceptSelectionMap = '<C-t>'
+" let g:CommandTAcceptSelectionTabMap = '<cr>'
+
+" CtrlP - switch the default so Enter opens the file in a new tab
+let g:ctrlp_prompt_mappings = {
+    \ 'AcceptSelection("e")': ['<c-t>'],
+    \ 'AcceptSelection("t")': ['<cr>', '<2-LeftMouse>'],
+    \ }
+let g:ctrlp_map = '<D-t>'
 
 map <D-p> <C-P>
 inoremap <Tab> <C-P>
@@ -128,7 +135,7 @@ function! <SID>StripTrailingWhitespaces()
     " Clean up: restore previous search history, and cursor position
     let @/=_s
     call cursor(l, c)
-    echom "Stripped trailing whitespace"
+    " echom "Stripped trailing whitespace"
 endfunction
 
 function! <SID>Clean()
@@ -142,7 +149,7 @@ function! <SID>Clean()
     " Clean up: restore previous search history, and cursor position
     let @/=_sC
     call cursor(lC, cC)
-    echom "Cleaned whitespace"
+    " echom "Cleaned whitespace"
 endfunction
 
 nnoremap <C-H> :Hexmode<CR>
@@ -192,14 +199,14 @@ endfunction
 
 " autocommands
 if has('autocmd')
-  # autocmd FileType make     set noexpandtab
-  # autocmd FileType python   set noexpandtab
-  # autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
+   autocmd FileType make     set noexpandtab
+   autocmd FileType python   set noexpandtab
+   autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
 
-"  if (&ft == "make") || (&ft == "python")
-"  else
-"    autocmd BufWritePre * :call <SID>Clean()
-"  endif
+  if (&ft == "make") || (&ft == "python")
+  else
+    autocmd BufWritePre * :call <SID>Clean()
+  endif
 endif
 
 if has("gui_macvim")
@@ -210,13 +217,10 @@ if has("gui_macvim")
   macmenu &File.New\ Tab key=<nop>
 endif
 
-map <D-t> <Esc> :CommandT<CR>
-inoremap <D-t> <Esc> :CommandT<CR>
+" map <D-t> <Esc> :CtrlP<CR>
+" inoremap <D-t> <Esc> :CtrlP<CR>
 
 map <D-f> <Esc> /
 inoremap <D-f> <Esc> /
-
-map <D-t><D-t> <Esc> :CommandTFlush<CR>
-inoremap <D-t><D-t> <Esc> :CommandTFlush<CR>
 
 
