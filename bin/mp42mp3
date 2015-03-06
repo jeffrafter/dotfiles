@@ -6,4 +6,10 @@
 #
 #  Where 0 is the seek seconds from the start of the file if you want to clip
 
-ffmpeg -i "$1" -vn -ab 192k -acodec mp3 -ss "$3" "$2"
+if [ $4 ]; then
+  ffmpeg -i "$1" -vn -ab 192k -acodec mp3 -ss "$3" -to "$4" "$2"
+elif [ $3 ]; then
+  ffmpeg -i "$1" -vn -ab 192k -acodec mp3 -ss "$3" "$2"
+else
+  ffmpeg -i "$1" -vn -ab 192k -acodec mp3 -ss "0" "$2"
+fi
