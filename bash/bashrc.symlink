@@ -32,3 +32,6 @@ esac
 if [ -f ~/.bash_extras ]; then
    source ~/.bash_extras
 fi
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"

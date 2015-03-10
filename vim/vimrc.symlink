@@ -284,10 +284,10 @@ if has('autocmd')
   autocmd FileType python   set noexpandtab
   autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
 
-  if (&ft == "make") || (&ft == "python")
-  else
+"  if (&ft == "make") || (&ft == "python")
+"  else
     autocmd BufWritePre * :call <SID>Clean()
-  endif
+"  endif
 endif
 
 if has("gui_macvim")
@@ -298,8 +298,8 @@ if has("gui_macvim")
   macmenu &File.New\ Tab key=<nop>
 endif
 
-map <D-t> <Esc> <D-p>
-inoremap <D-t> <Esc> <D-p>
+map <D-t> <Esc> :CtrlP<CR>
+inoremap <D-t> <Esc> :CtrlP<CR>
 
 map <D-f> <Esc> /
 inoremap <D-f> <Esc> /
