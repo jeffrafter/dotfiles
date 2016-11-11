@@ -10,6 +10,9 @@
 "             See http://sam.zoy.org/wtfpl/COPYING for more details.
 "============================================================================
 
+" I hate you thing that pops up!!!!!
+finish
+
 if exists('g:loaded_syntastic_java_javac_checker')
     finish
 endif

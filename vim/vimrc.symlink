@@ -27,7 +27,8 @@ let g:ctrlp_prompt_mappings = {
     \ }
 let g:ctrlp_map = '<D-t>'
 let g:ctrlp_max_files=0
-let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|tmp\|log'
+let g:ctrlp_max_depth=40
+let g:ctrlp_custom_ignore = '\v[\/](node_modules|DS_Store|target|dist|git|tmp|log|_build|deps)|(\.(swp|ico|git|svn))$'
 " let g:ctrlp_user_command = 'ag %s -f -l --nocolor -g ""'
 
 map <D-p> <C-P>
@@ -56,6 +57,10 @@ set spell
 
 syntax enable
 set background=dark
+set synmaxcol=255
+set ttyfast " u got a fast terminal
+set ttyscroll=3
+set lazyredraw " to avoid scrolling problems
 colorscheme solarized
 " hi Normal guibg=#111117
 " hi Normal guibg=#FDF6E3
@@ -296,8 +301,6 @@ if has('autocmd')
 
   if (&ft != "ruby")
   else
-    echo "RuboCop"
-    autocmd BufWritePre * :call <SID>RuboCop('')
   endif
 endif
 
