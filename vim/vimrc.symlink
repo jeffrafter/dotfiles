@@ -26,8 +26,13 @@ let g:ctrlp_prompt_mappings = {
     \ 'AcceptSelection("t")': ['<cr>', '<2-LeftMouse>'],
     \ }
 let g:ctrlp_map = '<D-t>'
+let g:ctrlp_max_files=0
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|tmp\|log'
+" let g:ctrlp_user_command = 'ag %s -f -l --nocolor -g ""'
 
 map <D-p> <C-P>
+inoremap <D-p> <C-P>
+map <Tab> <C-P>
 inoremap <Tab> <C-P>
 
 " alt+n or alt+p to navigate between entries in QuickFix
@@ -55,7 +60,6 @@ colorscheme solarized
 " hi Normal guibg=#111117
 " hi Normal guibg=#FDF6E3
 
-" Formatting (some of these are for coding in C and C++)
 set ts=2  " Tabs are 2 spaces
 set bs=2  " Backspace over everything in insert mode
 set shiftwidth=2  " Tabs under smart indent
@@ -280,22 +284,26 @@ command! -range=% FormatXML <line1>,<line2>call DoFormatXML()
 
 " autocommands
 if has('autocmd')
+  autocmd FileType go       set noexpandtab
   autocmd FileType make     set noexpandtab
   autocmd FileType python   set noexpandtab
+
   autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
 
-"  if (&ft == "make") || (&ft == "python")
-"  else
+  if (&ft != "make") && (&ft != "python") || (&ft != "go")
     autocmd BufWritePre * :call <SID>Clean()
-"  endif
+  endif
+
+  if (&ft != "ruby")
+  else
+    echo "RuboCop"
+    autocmd BufWritePre * :call <SID>RuboCop('')
+  endif
 endif
 
 if has("gui_macvim")
   macmenu &File.New\ Tab key=<nop>
-endif
-
-if has("gui_macvim")
-  macmenu &File.New\ Tab key=<nop>
+  macmenu &File.Print key=<nop>
 endif
 
 map <D-t> <Esc> :CtrlP<CR>
