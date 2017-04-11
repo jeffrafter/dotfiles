@@ -219,8 +219,8 @@ setup_osx () {
   defaults write com.apple.NetworkBrowser BrowseAllInterfaces -bool true
   success "Enable AirDrop over Ethernet and on unsupported Macs running Lion"
 
-  sudo nvram boot-args="mbasd=1"
-  success "Enable the MacBook Air SuperDrive on any Mac"
+  # sudo nvram boot-args="mbasd=1"
+  # success "Enable the MacBook Air SuperDrive on any Mac"
 
   chflags nohidden ~/Library
   success "Show the ~/Library folder"
